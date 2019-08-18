@@ -62,18 +62,44 @@ public class util.Descriptor : GLib.Object{
         string result="";
         int i=0;
         foreach (var expression in expressions) {
-            result+=readCronExpression(expressions[i],i);
+            string partialResult=readCronExpression(expressions[i],i);
+            if(partialResult.has_prefix("-1")){
+                return partialResult;
+            }
+            result+=partialResult;
             i++;
         }
+        if(result.contains(" at every hour")){
+            result=result.replace(" at every hour","");
+        }
+        if(result.contains(" on every day of month")){
+            result=result.replace(" on every day of month","");
+        }
+        if(result.contains(" on every month")){
+            result=result.replace(" on every month","");
+        }
+        if(result.contains(" on every day of week")){
+            result=result.replace(" on every day of week","");
+        } 
+        //result=result._strip();
         return result;
     }
 
     private string readRangeCronExpression(string expression,int periodPosition){
         string[] numbersAsString=expression.split("-");
-        if(numbersAsString.length!=2 || int.parse(numbersAsString[0])==0 || int.parse(numbersAsString[1])==0 || (int.parse(numbersAsString[0]) > int.parse(numbersAsString[1]))){
+        if(numbersAsString.length!=2 || int.parse(numbersAsString[0])==0 || 
+        int.parse(numbersAsString[1])==0 || (int.parse(numbersAsString[0]) > int.parse(numbersAsString[1]))){
             return "-1 "+expression+" is not a valid interval";
         }
-        return "from "+ordinalNumbers[int.parse(numbersAsString[0])-1]+" to "+ordinalNumbers[int.parse(numbersAsString[1])-1]+" "+periods[periodPosition];
+        return " from "+ordinalNumbers[int.parse(numbersAsString[0])-1]+" to "+ordinalNumbers[int.parse(numbersAsString[1])-1]+" "+periods[periodPosition];
+    }
+
+    private bool isZero(string value){
+        for (int a = 0; a < value.length; a++) {
+            if(value[a]!='0')
+                return false;
+        }
+        return true;
     }
 
     private string readCronExpression(string expressionSent,int periodPosition){
@@ -86,11 +112,18 @@ public class util.Descriptor : GLib.Object{
         }
         if(expression=="*"){
             return startWith+" every "+periods[periodPosition];
-        }else if(expression.has_prefix("*/")){
-            string numberString=expression.replace("*/","");
-            int number=int.parse(numberString);
-            if(number==0)
-                return "-1 "+number.to_string()+" is not a number";
+        }else if(expression.contains("/")){
+            string[] expressions=expression.split("/");
+            
+            if(expressions.length!=2 || int.parse(expressions[1])==0){
+                return "-1 "+expression+" is not a valid reccurence";
+            }else if(expressions[0].contains("-")){
+                startWith=readRangeCronExpression(expressions[0],periodPosition);
+                if(startWith.has_prefix("-1")){
+                    return startWith;
+                }
+            }
+            int number=int.parse(expressions[1]);
             return startWith+" every "+ordinalNumbers[number-1]+" "+periods[periodPosition];
         }else if(expression.contains("-")){
             return readRangeCronExpression(expression,periodPosition);
@@ -105,7 +138,7 @@ public class util.Descriptor : GLib.Object{
             }
             int count=0;
             foreach (var part in partsAsString) {
-                if(int.parse(part)==0 && part!="0" && part!="00" && part!="000" && part!="0000" && part!="00000" && part!="000000"){
+                if(int.parse(part)==0 && !isZero(part)){
                     if(periodPosition==2 || periodPosition==4){
                         //we can have days here
                         int i=0;
@@ -165,22 +198,7 @@ public class util.Descriptor : GLib.Object{
               
             }
             return toReturn;
-        }/*else if(int.parse(expression)!=0){
-            string toReturn=startWith+" "+periods[periodPosition]+" ";
-            int value =int.parse(expression);
-            if(((value>59 || value<0) && periodPosition==0) || ((value>23 || value<0) && periodPosition==1) || ((value>31 || value<1) && periodPosition==2)
-                || ((value>12 || value<1) && periodPosition==3) || ((value>8 || value<1) && periodPosition==4)){
-                    return "-1 "+expression+" contains data out of bound";
-                }
-            if(periodPosition==3){
-
-            }else if(periodPosition==4){
-
-            }else{
-                toReturn+=value;
-            }
-        }*/
-        
+        }
     }
     
      private bool isCommandValid() {
@@ -192,7 +210,8 @@ public class util.Descriptor : GLib.Object{
     }
     
     public static int main(string[] args){
-        Descriptor descriptor=new Descriptor("23 0-20/2 * * *","/usr/bin/ls");
+        Descriptor descriptor=new Descriptor("23 1-20/2 * * *","/usr/bin/ls");
+        //if(descriptor.isZero("0000"))
         print(descriptor.explain());
         return 0;
     }
