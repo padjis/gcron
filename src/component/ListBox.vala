@@ -10,6 +10,7 @@ public class component.ListBox : Gtk.ListBox{
 
     public void reset(){
         this.foreach ((element) => this.remove (element));
+        add_info_log("The system will display messages here !");
         window.show_all();
     }
 
