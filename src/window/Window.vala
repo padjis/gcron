@@ -1,5 +1,6 @@
-using grid;
-public class window.Window : Gtk.ApplicationWindow{
+using component;
+using Gtk;
+public class window.Window : ApplicationWindow{
     public Window(Application application){
         Object(
             application:application
@@ -7,24 +8,38 @@ public class window.Window : Gtk.ApplicationWindow{
     }
     
     construct{
-        title="Cronera - 0.0.1";
-        window_position = Gtk.WindowPosition.CENTER;
+        title="Cronera";
+        window_position = WindowPosition.CENTER;
         //set_default_size (200, 50);
         set_border_width(10);
 
-        Grid grid=new Grid();
+        component.Grid grid=new component.Grid();
 
         grid.add_full_line("Hello","epojgpeorjgpoehrgpoehrpgoheropgh");
         grid.add_full_line("Heleferferglo","epojgpeegrgergergergergorjgpoehrgpoehrpgoheropgh");
         grid.add_full_line("rgt","grtg");
-        grid.add_empty_line();
 
         grid.add_space();
 
-        grid.add_info_log("info log");
-        grid.add_error_log("info log regergergijeoirgj erigoeirugiuerbgireubgireougbierugbeiorugbierubgieorgbu");
+        grid.add_empty_line();
 
-        add(grid);
+        Gtk.Box box=new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
+
+        Gtk.Frame frame1=new Gtk.Frame("Current user cron setup");
+        frame1.add(grid);
+
+        Gtk.Frame frame2=new Gtk.Frame("Message logs");
+        //frame2.add(grid);
+
+        component.ListBox listBox=new component.ListBox();
+        listBox.add_info_log("The system will display messages here !");
+
+        frame2.add(listBox);
+
+        box.pack_start (frame1, false, false, 0);
+        box.pack_start (frame2, false, false, 0);
+
+        add(box);
 
         show_all();
     }
