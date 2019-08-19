@@ -2,12 +2,22 @@ public class component.Grid : Gtk.Grid{
 
     public int position { get; set;}
     public int space { get; set;}
+    public ListBox listBox { get; construct;}
 
-    public Grid(){
+    public Grid(ListBox listBox){
         Object(
             position:0,
-            space:50
+            space:50,
+            listBox:listBox
         );
+    }
+
+    public void log_info(){
+        listBox.add_info_log("Message from the grid");
+    }
+
+    public void log_error(){
+        listBox.add_error_log("Error from the grid");
     }
 
     public void add_space(){
@@ -30,9 +40,11 @@ public class component.Grid : Gtk.Grid{
         attach_next_to(label4,label3,Gtk.PositionType.RIGHT);
 
         Gtk.Button button1 = new Gtk.Button.with_label ("Explain");
+        button1.clicked.connect (this.log_info);
         attach_next_to(button1,label4,Gtk.PositionType.RIGHT);
 
         Gtk.Button button2 = new Gtk.Button.with_label ("Delete");
+        button2.clicked.connect (this.log_error);
         attach_next_to(button2,button1,Gtk.PositionType.RIGHT);
 
         position++;
