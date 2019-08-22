@@ -68,7 +68,7 @@ public class util.Cron : GLib.Object{
         return std_out;
     }
     
-    public static int main(string[] args){
+    /*public static int main(string[] args){
         Cron cron=new Cron();
         Array<Array<string>> result=cron.readCron();
         for (int i = 0; i < result.length ; i++) {
@@ -80,5 +80,5 @@ public class util.Cron : GLib.Object{
             print("\n");
         }
         return 0;
-    }
+    } */
 }

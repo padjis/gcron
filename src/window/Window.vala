@@ -1,5 +1,6 @@
 using component;
 using Gtk;
+using util;
 public class window.Window : ApplicationWindow{
     public Window(Application application){
         Object(
@@ -11,7 +12,6 @@ public class window.Window : ApplicationWindow{
     construct{
         title="Cronera";
         window_position = WindowPosition.CENTER;
-        //set_default_size (200, 50);
         set_border_width(10);
 
         Gtk.Box box=new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
@@ -25,9 +25,11 @@ public class window.Window : ApplicationWindow{
 
         component.Grid grid=new component.Grid(listBox);
 
-        grid.add_full_line("23 1-20/2 * * *","/usr/bin/ls");
-        grid.add_full_line("Heleferferglo","epojgpeegrgergergergergorjgpoehrgpoehrpgoheropgh");
-        grid.add_full_line("rgt","grtg");
+        Cron cron=new Cron();
+        Array<Array<string>> result=cron.readCron();
+        for (int i = 0; i < result.length ; i++) {
+            grid.add_full_line(result.index(i).index(0),result.index(i).index(1));
+        }
 
         grid.add_space();
 

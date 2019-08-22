@@ -11,9 +11,9 @@ executable(
     'src/component/button/DisplayButton.vala',
     'src/component/button/FullExplainButton.vala',
     'src/util/Descriptor.vala',
+    'src/util/Cron.vala',
     dependencies: [
-        dependency('gtk+-3.0'),
-        dependency('posix')
+        dependency('gtk+-3.0')
     ],
     install:true
 )
