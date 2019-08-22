@@ -11,7 +11,8 @@ public class window.Window : ApplicationWindow{
     
     construct{
         title="Gcron";
-        window_position = WindowPosition.CENTER;
+        window_position = WindowPosition.CENTER; 
+        set_default_size(575,200);
         set_border_width(10);
 
         Gtk.Box box=new Gtk.Box(Gtk.Orientation.VERTICAL, 0);

@@ -11,15 +11,23 @@ public class component.Grid : Gtk.Grid{
             space:50,
             listBox:listBox
         );
+        add_space();
+        add_explanation_line();
     }
 
-    public void log_info(){
-        listBox.add_info_log("Message from the grid");
+    public void add_explanation_line(){
+        var expressionLabel = new Gtk.Label("-CRON EXPRESSION-");
+        attach(expressionLabel,0,position*space);
+
+        var label2=new Gtk.Label("\t");
+        attach_next_to(label2,expressionLabel,Gtk.PositionType.RIGHT);
+        
+        var commandLabel = new Gtk.Label("-CRON COMMAND-");
+        attach_next_to(commandLabel,label2,Gtk.PositionType.RIGHT);
+
+        position++;
     }
 
-    public void log_error(){
-        listBox.add_error_log("Error from the grid");
-    }
 
     public void add_space(){
         var label = new Gtk.Label("");
@@ -47,7 +55,6 @@ public class component.Grid : Gtk.Grid{
         attach_next_to(displayButton,fullExplainButton,Gtk.PositionType.RIGHT);
 
         Gtk.Button button3 = new Gtk.Button.with_label ("Delete");
-        button3.clicked.connect (this.log_error);
         attach_next_to(button3,displayButton,Gtk.PositionType.RIGHT);
 
         position++;
@@ -66,9 +73,10 @@ public class component.Grid : Gtk.Grid{
         var label4=new Gtk.Label("\t");
         attach_next_to(label4,entry2,Gtk.PositionType.RIGHT);
 
-        Gtk.Button button1 = new Gtk.Button.with_label ("Add new cron");
+        Gtk.Button button1 = new Gtk.Button.with_label ("Add new cron line");
         attach_next_to(button1,label4,Gtk.PositionType.RIGHT,3);
 
         position++;
+        add_space();
     }
 }
