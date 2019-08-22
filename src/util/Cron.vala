@@ -1,21 +1,45 @@
 public class util.Cron : GLib.Object{
 
-    public string readCronAsString () {
+    public Array<Array<string>> readCron () {
+        Array<Array<string>> finalResult= new Array<Array<string>> ();
         string result= execute("crontab -l");
         if(result==null || result.length==0)
-            return "-1";
+            return finalResult;
         string getResult=result;
         string[] lines=getResult.split("\n");
-        string finalResult="";
-        int addGoToNewLine=0;
         for (int a = 0; a < lines.length; a++) {
             if(lines[a]!=null && lines[a].length!=0 && !lines[a].has_prefix("#")){
-                if(addGoToNewLine==1){
-                    finalResult+="\n";
-                }
-                finalResult=finalResult+lines[a];
-                if(addGoToNewLine==0)
-                    addGoToNewLine=1;
+                string expression="";
+                string command="";
+                string[] datas=lines[a].split(" ");
+                //string line=lines[a];
+                Array<string> aResult= new Array<string> ();
+                if(datas[0]=="@reboot" || datas[0]=="@yearly" || datas[0]=="@annually" || datas[0]=="@monthly" || 
+                    datas[0]=="@weekly" || datas[0]=="@daily" || datas[0]=="@midnight" || datas[0]=="@hourly" ){
+                        expression=datas[0];
+                        for (int b = 1; b < datas.length; b++) {
+                            if(b!=1){
+                                command=command+" ";
+                            }
+                            command=command+datas[b];
+                        }
+                    }else{
+                        for (int b = 0; b < 5; b++) {
+                            if(b!=0){
+                                expression=expression+" ";
+                            }
+                            expression=expression+datas[b];
+                        }
+                        for (int b = 5; b < datas.length; b++) {
+                            if(b!=5){
+                                command=command+" ";
+                            }
+                            command=command+datas[b];
+                        }
+                    }
+                aResult.append_val (expression);
+                aResult.append_val (command);
+                finalResult.append_val(aResult);
             }
             
         } 
@@ -46,7 +70,15 @@ public class util.Cron : GLib.Object{
     
     public static int main(string[] args){
         Cron cron=new Cron();
-        print(cron.readCronAsString());
+        Array<Array<string>> result=cron.readCron();
+        for (int i = 0; i < result.length ; i++) {
+            Array<string> aResult=result.index(i);
+            for (int j = 0; j < aResult.length ; j++) {
+                print ("%s", aResult.index (j));
+                print ("\t");
+            }
+            print("\n");
+        }
         return 0;
     }
 }
