@@ -43,9 +43,13 @@ public class component.Grid : Gtk.Grid{
         button1.clicked.connect (this.log_info);
         attach_next_to(button1,label4,Gtk.PositionType.RIGHT);
 
-        Gtk.Button button2 = new Gtk.Button.with_label ("Delete");
+        Gtk.Button button2 = new Gtk.Button.with_label ("Display");
         button2.clicked.connect (this.log_error);
         attach_next_to(button2,button1,Gtk.PositionType.RIGHT);
+
+        Gtk.Button button3 = new Gtk.Button.with_label ("Delete");
+        button2.clicked.connect (this.log_error);
+        attach_next_to(button3,button2,Gtk.PositionType.RIGHT);
 
         position++;
     }
