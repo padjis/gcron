@@ -2,7 +2,7 @@ public class Application:Gtk.Application{
     
     public Application(){
         Object(
-            application_id: "com.github.padjis.cronera",
+            application_id: "com.github.padjis.gcron",
             flags: ApplicationFlags.FLAGS_NONE
         );
     }

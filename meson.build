@@ -1,4 +1,4 @@
-project('com.github.padjis.cronera','vala','c')
+project('com.github.padjis.gcron','vala','c')
 
 executable(
     meson.project_name(),

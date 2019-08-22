@@ -3,5 +3,5 @@ rm -rf build
 meson build --prefix=/usr
 cd build
 ninja
-./com.github.padjis.cronera
+./com.github.padjis.gcron
 cd ..

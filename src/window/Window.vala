@@ -10,7 +10,7 @@ public class window.Window : ApplicationWindow{
     }
     
     construct{
-        title="Cronera";
+        title="Gcron";
         window_position = WindowPosition.CENTER;
         set_border_width(10);
 
