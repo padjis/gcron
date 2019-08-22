@@ -12,7 +12,8 @@ executable(
     'src/component/button/FullExplainButton.vala',
     'src/util/Descriptor.vala',
     dependencies: [
-        dependency('gtk+-3.0')
+        dependency('gtk+-3.0'),
+        dependency('posix')
     ],
     install:true
 )
