@@ -3,7 +3,8 @@ using Gtk;
 public class window.Window : ApplicationWindow{
     public Window(Application application){
         Object(
-            application:application
+            application:application,
+            resizable:false
         );
     }
     
