@@ -40,12 +40,11 @@ public class component.Grid : Gtk.Grid{
         var label4=new Gtk.Label("\t");
         attach_next_to(label4,commandLabel,Gtk.PositionType.RIGHT);
 
-        Gtk.Button button1 = new Gtk.Button.with_label ("Explain");
-        button1.clicked.connect (this.log_info);
-        attach_next_to(button1,label4,Gtk.PositionType.RIGHT);
+        FullExplainButton fullExplainButton = new FullExplainButton (listBox,expressionLabel.get_text(),commandLabel.get_text());
+        attach_next_to(fullExplainButton,label4,Gtk.PositionType.RIGHT);
 
         DisplayButton displayButton = new DisplayButton (listBox,expressionLabel,commandLabel);
-        attach_next_to(displayButton,button1,Gtk.PositionType.RIGHT);
+        attach_next_to(displayButton,fullExplainButton,Gtk.PositionType.RIGHT);
 
         Gtk.Button button3 = new Gtk.Button.with_label ("Delete");
         button3.clicked.connect (this.log_error);
@@ -67,11 +66,8 @@ public class component.Grid : Gtk.Grid{
         var label4=new Gtk.Label("\t");
         attach_next_to(label4,entry2,Gtk.PositionType.RIGHT);
 
-        Gtk.Button button1 = new Gtk.Button.with_label ("Explain");
-        attach_next_to(button1,label4,Gtk.PositionType.RIGHT);
-
-        Gtk.Button button2 = new Gtk.Button.with_label ("Add");
-        attach_next_to(button2,button1,Gtk.PositionType.RIGHT);
+        Gtk.Button button1 = new Gtk.Button.with_label ("Add new cron");
+        attach_next_to(button1,label4,Gtk.PositionType.RIGHT,3);
 
         position++;
     }

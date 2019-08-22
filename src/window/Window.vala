@@ -24,7 +24,7 @@ public class window.Window : ApplicationWindow{
 
         component.Grid grid=new component.Grid(listBox);
 
-        grid.add_full_line("Hello","epojgpeorjgpoehrgpoehrpgoheropgh");
+        grid.add_full_line("23 1-20/2 * * *","/usr/bin/ls");
         grid.add_full_line("Heleferferglo","epojgpeegrgergergergergorjgpoehrgpoehrpgoheropgh");
         grid.add_full_line("rgt","grtg");
 

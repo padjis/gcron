@@ -29,10 +29,12 @@ public class util.Descriptor : GLib.Object{
         if(periodExplanation.has_prefix("-1")){
             return periodExplanation;
         }
-        if(!isCommandValid()){
-            return "-2";
+        else if(!isCommandValid()){
+            return "-2 The command inserted is invalid";
+        }else{
+            periodExplanation=periodExplanation.strip();
+            return "'"+periodExplanation+"' run '"+command+"'";
         }
-        return periodExplanation+" run "+command;
     }
     
     private string getPeriodExplanation() {
@@ -55,7 +57,7 @@ public class util.Descriptor : GLib.Object{
     
     private string readAllCronExpression(){
         if(periodicity==null || !periodicity.contains(" "))
-            return "-1 empty periodicity";
+            return "-1 invalid period '"+periodicity+"'";
         string[] expressions=periodicity.split(" ");
         if(expressions.length!=5)
             return "-1 cron elements has not 5 elements";
@@ -80,8 +82,7 @@ public class util.Descriptor : GLib.Object{
         }
         if(result.contains(" on every day of week")){
             result=result.replace(" on every day of week","");
-        } 
-        //result=result._strip();
+        }
         return result;
     }
 
@@ -209,10 +210,10 @@ public class util.Descriptor : GLib.Object{
 	    }
     }
     
-    public static int main(string[] args){
+    /*public static int main(string[] args){
         Descriptor descriptor=new Descriptor("23 1-20/2 * * *","/usr/bin/ls");
         //if(descriptor.isZero("0000"))
         print(descriptor.explain());
         return 0;
-    }
+    } */
 }
