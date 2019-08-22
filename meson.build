@@ -8,6 +8,7 @@ executable(
     'src/component/Grid.vala',
     'src/component/ListBox.vala',
     'src/component/ReadOnlyEntry.vala',
+    'src/component/button/DisplayButton.vala',
     dependencies: [
         dependency('gtk+-3.0')
     ],

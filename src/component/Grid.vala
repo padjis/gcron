@@ -1,3 +1,4 @@
+using component.button;
 public class component.Grid : Gtk.Grid{
 
     public int position { get; set;}
@@ -27,29 +28,28 @@ public class component.Grid : Gtk.Grid{
     }
 
     public void add_full_line(string expression,string command){
-        var label1 = new Gtk.Label(expression);
-        attach(label1,0,position*space);
+        var expressionLabel = new Gtk.Label(expression);
+        attach(expressionLabel,0,position*space);
 
         var label2=new Gtk.Label("\t");
-        attach_next_to(label2,label1,Gtk.PositionType.RIGHT);
+        attach_next_to(label2,expressionLabel,Gtk.PositionType.RIGHT);
         
-        var label3 = new Gtk.Label(command);
-        attach_next_to(label3,label2,Gtk.PositionType.RIGHT);
+        var commandLabel = new Gtk.Label(command);
+        attach_next_to(commandLabel,label2,Gtk.PositionType.RIGHT);
 
         var label4=new Gtk.Label("\t");
-        attach_next_to(label4,label3,Gtk.PositionType.RIGHT);
+        attach_next_to(label4,commandLabel,Gtk.PositionType.RIGHT);
 
         Gtk.Button button1 = new Gtk.Button.with_label ("Explain");
         button1.clicked.connect (this.log_info);
         attach_next_to(button1,label4,Gtk.PositionType.RIGHT);
 
-        Gtk.Button button2 = new Gtk.Button.with_label ("Display");
-        button2.clicked.connect (this.log_error);
-        attach_next_to(button2,button1,Gtk.PositionType.RIGHT);
+        DisplayButton displayButton = new DisplayButton (listBox,expressionLabel,commandLabel);
+        attach_next_to(displayButton,button1,Gtk.PositionType.RIGHT);
 
         Gtk.Button button3 = new Gtk.Button.with_label ("Delete");
-        button2.clicked.connect (this.log_error);
-        attach_next_to(button3,button2,Gtk.PositionType.RIGHT);
+        button3.clicked.connect (this.log_error);
+        attach_next_to(button3,displayButton,Gtk.PositionType.RIGHT);
 
         position++;
     }
