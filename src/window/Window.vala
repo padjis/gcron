@@ -20,19 +20,20 @@ public class window.Window : ApplicationWindow{
         Gtk.Frame frame2=new Gtk.Frame("Message logs");
 
         component.ListBox listBox=new component.ListBox(this);
-        listBox.add_info_log("The system will display messages here !");
+        listBox.add_info_log("The system will display messages here");
         
         frame2.add(listBox);
 
-        component.Grid grid=new component.Grid(listBox);
-
         Cron cron=new Cron();
         Array<Array<string>> result=cron.readCron();
+        component.Grid grid=new component.Grid(listBox,result.length);
         for (int i = 0; i < result.length ; i++) {
             grid.add_full_line(result.index(i).index(0),result.index(i).index(1));
         }
 
-        grid.add_space();
+        if(result.length!=0){
+            grid.add_space();
+        }
 
         grid.add_empty_line();
 

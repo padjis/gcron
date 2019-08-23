@@ -4,15 +4,21 @@ public class component.Grid : Gtk.Grid{
     public int position { get; set;}
     public int space { get; set;}
     public ListBox listBox { get; construct;}
+    public uint numberOfLines { get; set;}
 
-    public Grid(ListBox listBox){
+    public Grid(ListBox listBox,uint numberOfLines){
         Object(
             position:0,
             space:50,
-            listBox:listBox
+            listBox:listBox,
+            numberOfLines:numberOfLines
         );
+        if(numberOfLines==0){
+            listBox.add_info_log("No cron setup found, create a new cron");
+        }
         add_space();
         add_explanation_line();
+        add_space();
     }
 
     public void add_explanation_line(){
