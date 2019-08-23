@@ -1,11 +1,41 @@
 public class util.Cron : GLib.Object{
 
+    string cronContent="";
+
+    public string writeCron (string cronLine){
+        readCron();
+        if(cronContent.length==0){
+            cronContent=cronContent+cronLine+"\n";
+        }else{
+            cronContent=cronContent+"\n"+cronLine+"\n";
+        }
+        string result="";
+        try {
+            FileIOStream iostream;
+            string fileName= "cron-XXXXXX.txt";
+            File file = File.new_tmp (fileName, out iostream);
+            //print ("tmp file name: %s\n", file.get_path ());
+
+            OutputStream ostream = iostream.output_stream;
+            DataOutputStream dostream = new DataOutputStream (ostream);
+            dostream.put_string (cronContent);
+            result= execute("crontab "+file.get_path ());
+            execute("rm "+file.get_path ());
+        } catch (Error e) {
+            //stderr.printf ("%s\n", e.message);
+            result=e.message;
+        }
+        return result;
+    }
+
     public Array<Array<string>> readCron () {
         Array<Array<string>> finalResult= new Array<Array<string>> ();
         string result= execute("crontab -l");
         if(result==null || result.length==0)
             return finalResult;
+            
         string getResult=result;
+        cronContent=result;
         string[] lines=getResult.split("\n");
         for (int a = 0; a < lines.length; a++) {
             if(lines[a]!=null && lines[a].length!=0 && !lines[a].has_prefix("#")){
@@ -78,7 +108,8 @@ public class util.Cron : GLib.Object{
                 print ("\t");
             }
             print("\n");
-        }
+        } 
+        print (cron.writeCron("* * * * * ls"));
         return 0;
-    } */
+    }*/
 }
