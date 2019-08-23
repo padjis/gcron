@@ -2,6 +2,17 @@ public class util.Cron : GLib.Object{
 
     string cronContent="";
 
+    public string writeCronFromUI (Gtk.Entry expressionEntry,Gtk.Entry commandEntry){
+        string expression=expressionEntry.text;
+        string command=commandEntry.text;
+        Descriptor descriptor=new Descriptor(expression,command);
+        string result=descriptor.explain();
+        if(result.has_prefix("-"))
+            return result;
+        string newresult=writeCron(expression+" "+command);
+        return newresult;
+    }
+
     public string writeCron (string cronLine){
         readCron();
         if(cronContent.length==0){
@@ -9,7 +20,7 @@ public class util.Cron : GLib.Object{
         }else{
             cronContent=cronContent+"\n"+cronLine+"\n";
         }
-        string result="";
+        //string result="";
         try {
             FileIOStream iostream;
             string fileName= "cron-XXXXXX.txt";
@@ -19,13 +30,14 @@ public class util.Cron : GLib.Object{
             OutputStream ostream = iostream.output_stream;
             DataOutputStream dostream = new DataOutputStream (ostream);
             dostream.put_string (cronContent);
-            result= execute("crontab "+file.get_path ());
-            execute("rm "+file.get_path ());
+            execute("crontab "+file.get_path ());
+            return cronLine+" has succesfully been added";
+            //execute("rm "+file.get_path ());
         } catch (Error e) {
             //stderr.printf ("%s\n", e.message);
-            result=e.message;
+            return e.message;
         }
-        return result;
+        //return result;
     }
 
     public Array<Array<string>> readCron () {

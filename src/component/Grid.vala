@@ -1,17 +1,20 @@
 using component.button;
+using util;
 public class component.Grid : Gtk.Grid{
 
     public int position { get; set;}
     public int space { get; set;}
     public ListBox listBox { get; construct;}
     public uint numberOfLines { get; set;}
+    public Cron cron { get; set;}
 
-    public Grid(ListBox listBox,uint numberOfLines){
+    public Grid(ListBox listBox,uint numberOfLines, Cron cron){
         Object(
             position:0,
             space:50,
             listBox:listBox,
-            numberOfLines:numberOfLines
+            numberOfLines:numberOfLines,
+            cron:cron
         );
         if(numberOfLines==0){
             listBox.add_info_log("No cron setup found, create a new cron");
@@ -79,7 +82,7 @@ public class component.Grid : Gtk.Grid{
         var label4=new Gtk.Label("\t");
         attach_next_to(label4,entry2,Gtk.PositionType.RIGHT);
 
-        Gtk.Button button1 = new Gtk.Button.with_label ("Add new cron line");
+        EmptyLineButton button1 = new EmptyLineButton(listBox,entry1,entry2,cron);
         attach_next_to(button1,label4,Gtk.PositionType.RIGHT,3);
 
         position++;

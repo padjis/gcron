@@ -26,7 +26,7 @@ public class window.Window : ApplicationWindow{
 
         Cron cron=new Cron();
         Array<Array<string>> result=cron.readCron();
-        component.Grid grid=new component.Grid(listBox,result.length);
+        component.Grid grid=new component.Grid(listBox,result.length,cron);
         for (int i = 0; i < result.length ; i++) {
             grid.add_full_line(result.index(i).index(0),result.index(i).index(1));
         }

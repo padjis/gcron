@@ -10,10 +10,12 @@ executable(
     'src/component/ReadOnlyEntry.vala',
     'src/component/button/DisplayButton.vala',
     'src/component/button/FullExplainButton.vala',
+    'src/component/button/EmptyLineButton.vala',
     'src/util/Descriptor.vala',
     'src/util/Cron.vala',
     dependencies: [
-        dependency('gtk+-3.0')
+        dependency('gtk+-3.0'),
+        dependency('gio-2.0')
     ],
     install:true
 )
