@@ -7,8 +7,15 @@ public class util.Cron : GLib.Object{
         string command=commandEntry.text;
         Descriptor descriptor=new Descriptor(expression,command);
         string result=descriptor.explain();
-        if(result.has_prefix("-"))
+        if(result.has_prefix("-")){
+            if(result.has_prefix("-1 ")){
+                result=result.replace("-1 ","");
+            }else if(result.has_prefix("-2 ")){
+                result=result.replace("-2 ","");
+            }
             return result;
+        }
+            
         string newresult=writeCron(expression+" "+command);
         return newresult;
     }
