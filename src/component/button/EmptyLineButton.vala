@@ -26,8 +26,7 @@ public class component.button.EmptyLineButton : Gtk.Button{
             }
             listBox.add_error_log(result);
         }else{
-            listBox.window.close();
-            listBox.window.application.activate();
+            listBox.add_info_log(result);
         }
     }
 }
