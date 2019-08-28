@@ -26,7 +26,7 @@ public class util.Descriptor : GLib.Object{
     //returns -1 for a bad periodicity and -2 for a bad command
     public string explain(){
         string periodExplanation=getPeriodExplanation();
-        if(periodExplanation.has_prefix("-1")){
+        if(periodExplanation.contains("-1")){
             return periodExplanation;
         }
         else if(!isCommandValid()){
@@ -65,7 +65,7 @@ public class util.Descriptor : GLib.Object{
         int i=0;
         foreach (var expression in expressions) {
             string partialResult=readCronExpression(expressions[i],i);
-            if(partialResult.has_prefix("-1")){
+            if(partialResult.contains("-1")){
                 return partialResult;
             }
             result+=partialResult;
@@ -236,7 +236,7 @@ public class util.Descriptor : GLib.Object{
             
             if(expressions[0].contains("-")){
                 startWith=readRangeCronExpression(expressions[0],periodPosition);
-                if(startWith.has_prefix("-1")){
+                if(startWith.contains("-1")){
                     return startWith;
                 }
             }

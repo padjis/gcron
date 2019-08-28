@@ -59,7 +59,7 @@ public class window.Window : ApplicationWindow{
         show_all();
     }
 
-    void reset(){
+    public void reset(){
         close();
         application.activate();
     }

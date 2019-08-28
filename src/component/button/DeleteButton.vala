@@ -16,16 +16,17 @@ public class component.button.DeleteButton : Gtk.Button{
 
     public void delete(){
         string result = cron.deleteCron(position);
-        if(result.has_prefix("-")){
+        if(result.contains("-")){
             //error
-            if(result.has_prefix("-1 ")){
+            if(result.contains("-1 ")){
                 result =result.replace("-1 ","");
-            }else if(result.has_prefix("-2 ")){
+            }else if(result.contains("-2 ")){
                 result =result.replace("-2 ","");
             }
             listBox.add_error_log(result);
         }else{
-            listBox.add_info_log(result);
+            //listBox.add_info_log(result);
+            listBox.window.reset();
         }
     }
 }

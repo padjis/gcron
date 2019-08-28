@@ -14,11 +14,11 @@ public class component.button.FullExplainButton : Gtk.Button{
 
     public void log(){
         string result = descriptor.explain();
-        if(result.has_prefix("-")){
+        if(result.contains("-")){
             //error
-            if(result.has_prefix("-1 ")){
+            if(result.contains("-1 ")){
                 result =result.replace("-1 ","");
-            }else if(result.has_prefix("-2 ")){
+            }else if(result.contains("-2 ")){
                 result =result.replace("-2 ","");
             }
             listBox.add_error_log(result);
