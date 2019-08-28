@@ -129,7 +129,7 @@ public class util.Descriptor : GLib.Object{
                 return false;
             }
         }
-        else if(!isValidValue(expressions[0],periodPosition)){
+        else if(expressions[0]!="*"){
             return false;
         }
         return true;
@@ -164,14 +164,7 @@ public class util.Descriptor : GLib.Object{
             }
         }
         else if(periodPosition==2){
-            if(intValue==0 && !isZero(value)){
-                //we can have days here
-                foreach (var day in days) {
-                    if(day==value){
-                        return true;
-                    }
-                }
-            }else if(intValue<=31 || intValue>=1){
+            if(intValue<=31 || intValue>=1){
                 return true;
             }
         }
