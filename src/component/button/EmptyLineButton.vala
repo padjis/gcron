@@ -26,6 +26,8 @@ public class component.button.EmptyLineButton : Gtk.Button{
             }
             listBox.add_error_log(result);
         }else{
+            expressionEntry.text="";
+            commandEntry.text="";
             listBox.add_info_log(result);
         }
     }
