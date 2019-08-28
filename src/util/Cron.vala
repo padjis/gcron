@@ -1,6 +1,7 @@
 public class util.Cron : GLib.Object{
 
     string cronContent="";
+    Array<Array<string>> contentAsArray;
 
     public string writeCronFromUI (Gtk.Entry expressionEntry,Gtk.Entry commandEntry){
         string expression=expressionEntry.text;
@@ -16,18 +17,37 @@ public class util.Cron : GLib.Object{
             return result;
         }
             
-        string newresult=writeCron(expression+" "+command);
+        string newresult=addCron(expression+" "+command);
         return newresult;
     }
 
-    public string writeCron (string cronLine){
+    public string addCron (string cronLine){
         readCron();
         if(cronContent.length==0){
             cronContent=cronContent+cronLine+"\n";
         }else{
             cronContent=cronContent+"\n"+cronLine+"\n";
         }
-        //string result="";
+        return editCron(cronContent,true,cronLine);
+    }
+
+    public string deleteCron (int position){
+        readCron();
+        string line=contentAsArray.index(position).index(0)+" "+contentAsArray.index(position).index(1);
+        contentAsArray.remove_index(position);
+        string content=writeCron();
+        return editCron(content,false,line);
+    }
+
+    public string writeCron(){
+        string result="";
+        for (int i = 0; i < contentAsArray.length ; i++) {
+            result=result+contentAsArray.index(i).index(0)+ " "+ contentAsArray.index(i).index(1)+"\n";
+        }
+        return result;
+    }
+
+    public string editCron (string content,bool add,string line){
         try {
             FileIOStream iostream;
             string fileName= "cron-XXXXXX.txt";
@@ -36,9 +56,15 @@ public class util.Cron : GLib.Object{
 
             OutputStream ostream = iostream.output_stream;
             DataOutputStream dostream = new DataOutputStream (ostream);
-            dostream.put_string (cronContent);
+            dostream.put_string (content);
             execute("crontab "+file.get_path ());
-            return cronLine+" has succesfully been added, reload!";
+            string result="";
+            if(add){
+                result=line+" has succesfully been added, reload!";
+            }else{
+                result=line+" has succesfully been deleted, reload!";
+            }
+            return result;
             //execute("rm "+file.get_path ());
         } catch (Error e) {
             //stderr.printf ("%s\n", e.message);
@@ -48,10 +74,10 @@ public class util.Cron : GLib.Object{
     }
 
     public Array<Array<string>> readCron () {
-        Array<Array<string>> finalResult= new Array<Array<string>> ();
+        contentAsArray= new Array<Array<string>> ();
         string result= execute("crontab -l");
         if(result==null || result.length==0)
-            return finalResult;
+            return contentAsArray;
             
         string getResult=result;
         cronContent=result;
@@ -88,11 +114,11 @@ public class util.Cron : GLib.Object{
                     }
                 aResult.append_val (expression);
                 aResult.append_val (command);
-                finalResult.append_val(aResult);
+                contentAsArray.append_val(aResult);
             }
             
         } 
-        return finalResult;
+        return contentAsArray;
     }
 
     public string execute (string command) {

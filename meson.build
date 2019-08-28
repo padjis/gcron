@@ -11,6 +11,7 @@ executable(
     'src/component/button/DisplayButton.vala',
     'src/component/button/FullExplainButton.vala',
     'src/component/button/EmptyLineButton.vala',
+    'src/component/button/DeleteButton.vala',
     'src/util/Descriptor.vala',
     'src/util/Cron.vala',
     dependencies: [

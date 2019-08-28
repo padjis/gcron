@@ -7,6 +7,7 @@ public class component.Grid : Gtk.Grid{
     public ListBox listBox { get; construct;}
     public uint numberOfLines { get; set;}
     public Cron cron { get; set;}
+    public int linePosition { get; set;}
 
     public Grid(ListBox listBox,uint numberOfLines, Cron cron){
         Object(
@@ -14,7 +15,8 @@ public class component.Grid : Gtk.Grid{
             space:50,
             listBox:listBox,
             numberOfLines:numberOfLines,
-            cron:cron
+            cron:cron,
+            linePosition:0
         );
         if(numberOfLines==0){
             listBox.add_info_log("No cron setup found, create a new cron");
@@ -63,10 +65,11 @@ public class component.Grid : Gtk.Grid{
         DisplayButton displayButton = new DisplayButton (listBox,expressionLabel,commandLabel);
         attach_next_to(displayButton,fullExplainButton,Gtk.PositionType.RIGHT);
 
-        Gtk.Button button3 = new Gtk.Button.with_label ("Delete");
-        attach_next_to(button3,displayButton,Gtk.PositionType.RIGHT);
+        DeleteButton deleteButton = new DeleteButton(listBox,linePosition,cron);
+        attach_next_to(deleteButton,displayButton,Gtk.PositionType.RIGHT);
 
         position++;
+        linePosition++;
     }
 
     public void add_empty_line(){
