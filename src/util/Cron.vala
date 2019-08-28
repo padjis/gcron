@@ -38,7 +38,7 @@ public class util.Cron : GLib.Object{
             DataOutputStream dostream = new DataOutputStream (ostream);
             dostream.put_string (cronContent);
             execute("crontab "+file.get_path ());
-            return cronLine+" has succesfully been added, please reload your cron config to display it!";
+            return cronLine+" has succesfully been added, reload!";
             //execute("rm "+file.get_path ());
         } catch (Error e) {
             //stderr.printf ("%s\n", e.message);

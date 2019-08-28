@@ -103,6 +103,126 @@ public class util.Descriptor : GLib.Object{
         return true;
     }
 
+    private bool isValidRangeExpression(string value,int periodPosition){
+        string[] expressions=value.split("-");
+
+        if(expressions.length!=2){
+            return false;
+        }
+        if(!isValidValue(expressions[0],periodPosition) || !isValidValue(expressions[1],periodPosition)){
+            return false;
+        }
+        return true;
+    }
+
+    private bool isValidPeriodExpression(string expression,int periodPosition){
+        string[] expressions=expression.split("/");
+            
+        if(expressions.length!=2){
+            return false;
+        }
+        if(!isValidValue(expressions[1],periodPosition)){
+            return false;
+        }
+        if(expressions[0].contains("-")){
+            if(!isValidRangeExpression(expressions[0],periodPosition)){
+                return false;
+            }
+        }
+        else if(!isValidValue(expressions[0],periodPosition)){
+            return false;
+        }
+        return true;
+    }
+
+    private bool isValidCommaExpression(string value,int periodPosition){
+        string[] expressions=value.split(",");
+
+        if(expressions.length!=2){
+            return false;
+        }
+        if(!isValidValue(expressions[0],periodPosition) || !isValidValue(expressions[1],periodPosition)){
+            return false;
+        }
+        return true;
+    }
+
+    private bool isValidValue(string value,int periodPosition){
+        int intValue=int.parse(value);
+        if(periodPosition==0){
+            if(isZero(value)){
+                return true;
+            }else if(intValue<=59 && intValue>0){
+                return true;
+            }
+        }
+        else if(periodPosition==1){
+            if(isZero(value)){
+                return true;
+            }else if(intValue<=23 && intValue>0){
+                return true;
+            }
+        }
+        else if(periodPosition==2){
+            if(intValue==0 && !isZero(value)){
+                //we can have days here
+                foreach (var day in days) {
+                    if(day==value){
+                        return true;
+                    }
+                }
+            }else if(intValue<=31 || intValue>=1){
+                return true;
+            }
+        }
+        else if(periodPosition==3){
+            if(intValue==0 && !isZero(value)){
+                //we can have months here
+                foreach (var month in months) {
+                    if(month==value){
+                        return true;
+                    }
+                }
+            }else if(intValue<=12 || intValue>=1){
+                return true;
+            }
+        }
+        else if(periodPosition==4){
+            if(intValue==0 && !isZero(value)){
+                //we can have days here
+                foreach (var day in days) {
+                    if(day==value){
+                        return true;
+                    }
+                }
+            }else if(intValue<=6 || intValue>0 || isZero(value)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private bool isValidCronExpression(string expression,int periodPosition){
+        if(expression=="*"){
+            return true;
+        }else if(expression.contains("/")){
+            if(isValidPeriodExpression(expression,periodPosition)){
+                return true;
+            }
+        }else if(expression.contains("-")){
+            if(isValidRangeExpression(expression,periodPosition)){
+                return true;
+            }
+        }else if(expression.contains(",")){
+            if(isValidCommaExpression(expression,periodPosition)){
+                return true;
+            }
+        }else if(isValidValue(expression,periodPosition)){
+            return true;
+        }
+        return false;
+    }
+
     private string readCronExpression(string expressionSent,int periodPosition){
         string expression=expressionSent.down();
         string startWith="";
@@ -111,14 +231,17 @@ public class util.Descriptor : GLib.Object{
         }else{
             startWith=" at";
         }
+
+        if(!isValidCronExpression(expression,periodPosition)){
+            return "-1 Invalid cron expression";
+        }
+            
         if(expression=="*"){
             return startWith+" every "+periods[periodPosition];
         }else if(expression.contains("/")){
             string[] expressions=expression.split("/");
             
-            if(expressions.length!=2 || int.parse(expressions[1])==0){
-                return "-1 "+expression+" is not a valid reccurence";
-            }else if(expressions[0].contains("-")){
+            if(expressions[0].contains("-")){
                 startWith=readRangeCronExpression(expressions[0],periodPosition);
                 if(startWith.has_prefix("-1")){
                     return startWith;
@@ -165,17 +288,12 @@ public class util.Descriptor : GLib.Object{
                         }
                     }else if(expression.contains("-")){
                         return readRangeCronExpression(expression,periodPosition);
-                    }else{
-                        return "-1 "+expression+" is not a valid cron part";
                     }
                   
                     
                 }else{
                     int value =int.parse(part);
-                    if(((value>59 || value<0) && periodPosition==0) || ((value>23 || value<0) && periodPosition==1) || ((value>31 || value<1) && periodPosition==2)
-                        || ((value>12 || value<1) && periodPosition==3) || ((value>8 || value<1) && periodPosition==4)){
-                            return "-1 "+expression+" contains data out of bound";
-                        }
+                
                     if(periodPosition==3){
                         part=describedMonths[value];
                         toReturn+=part;
