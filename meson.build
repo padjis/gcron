@@ -1,4 +1,4 @@
-project('com.github.padjis.gcron','vala','c')
+project('com.github.padjis.gcron','vala','c', version: '1.0.0')
 
 executable(
     meson.project_name(),
