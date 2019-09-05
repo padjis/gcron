@@ -1,9 +1,7 @@
 [Desktop Entry]
 Name=Gcron
-GenericName=Cron manager
-Comment=Manage and edit your cron jobs
 Categories=Office;Utility;TextTools;
 Exec=com.github.padjis.gcron
-Icon=com.github.padjis.gcron.png
+Icon=com.github.padjis.gcron
 Terminal=false
 Type=Application
