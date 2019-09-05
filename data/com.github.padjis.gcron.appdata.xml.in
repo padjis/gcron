@@ -6,6 +6,11 @@
   <project_license>GPL-3.0+</project_license>
   <name>Gcron</name>
   <summary>Display, understand and edit your cron configuration</summary>
+  <description>
+    <p>If you are tired to open your terminal in order to edit your cron jobs, or even better are interested in figuring out what does one of your current cron job do</p>
+
+    <p>Gcron is the solution for you, it is an easy to use graphic interface that edit the cron configuration of the current user as well as explains its content</p>
+  </description>
   <releases>
     <release version="0.0.1" date="2019-09-06">
       <description>
