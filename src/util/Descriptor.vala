@@ -43,14 +43,14 @@ public class util.Descriptor : GLib.Object{
         this.command=command;
     }
     
-    //returns -1 for a bad periodicity and -2 for a bad command
+    //returns <>1 for a bad periodicity and <>2 for a bad command
     public string explain(){
         string periodExplanation=getPeriodExplanation();
-        if(periodExplanation.contains("-1")){
+        if(periodExplanation.contains("<>1")){
             return periodExplanation;
         }
         else if(!isCommandValid()){
-            return "-2 The command inserted is invalid";
+            return "<>2 The command inserted is invalid";
         }else{
             periodExplanation=periodExplanation.strip();
             return "'"+periodExplanation+"' run '"+command+"'";
@@ -77,15 +77,15 @@ public class util.Descriptor : GLib.Object{
     
     private string readAllCronExpression(){
         if(periodicity==null || !periodicity.contains(" "))
-            return "-1 invalid period '"+periodicity+"'";
+            return "<>1 invalid period '"+periodicity+"'";
         string[] expressions=periodicity.split(" ");
         if(expressions.length!=5)
-            return "-1 cron elements has not 5 elements";
+            return "<>1 cron elements has not 5 elements";
         string result="";
         int i=0;
         foreach (var expression in expressions) {
             string partialResult=readCronExpression(expressions[i],i);
-            if(partialResult.contains("-1")){
+            if(partialResult.contains("<>1")){
                 return partialResult;
             }
             result+=partialResult;
@@ -110,7 +110,7 @@ public class util.Descriptor : GLib.Object{
         string[] numbersAsString=expression.split("-");
         if(numbersAsString.length!=2 || int.parse(numbersAsString[0])==0 || 
         int.parse(numbersAsString[1])==0 || (int.parse(numbersAsString[0]) > int.parse(numbersAsString[1]))){
-            return "-1 "+expression+" is not a valid interval";
+            return "<>1 "+expression+" is not a valid interval";
         }
         return " from "+ordinalNumbers[int.parse(numbersAsString[0])-1]+" to "+ordinalNumbers[int.parse(numbersAsString[1])-1]+" "+periods[periodPosition];
     }
@@ -246,7 +246,7 @@ public class util.Descriptor : GLib.Object{
         }
 
         if(!isValidCronExpression(expression,periodPosition)){
-            return "-1 Invalid cron expression";
+            return "<>1 Invalid cron expression";
         }
             
         if(expression=="*"){
@@ -256,7 +256,7 @@ public class util.Descriptor : GLib.Object{
             
             if(expressions[0].contains("-")){
                 startWith=readRangeCronExpression(expressions[0],periodPosition);
-                if(startWith.contains("-1")){
+                if(startWith.contains("<>1")){
                     return startWith;
                 }
             }

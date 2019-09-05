@@ -34,12 +34,12 @@ public class component.button.FullExplainButton : Gtk.Button{
 
     public void log(){
         string result = descriptor.explain();
-        if(result.contains("-")){
+        if(result.contains("<>")){
             //error
-            if(result.contains("-1 ")){
-                result =result.replace("-1 ","");
-            }else if(result.contains("-2 ")){
-                result =result.replace("-2 ","");
+            if(result.contains("<>1 ")){
+                result =result.replace("<>1 ","");
+            }else if(result.contains("<>2 ")){
+                result =result.replace("<>2 ","");
             }
             listBox.add_error_log(result);
         }else{
