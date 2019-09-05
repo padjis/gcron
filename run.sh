@@ -1,5 +1,5 @@
 #!/bin/bash
 cd build
 ninja
-./com.github.padjis.cronera
+./com.github.padjis.gcron
 cd ..

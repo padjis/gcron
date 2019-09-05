@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2019 Emmanuel Padjinou <emmanuel%padjinoudotkom> -->
+<component type="desktop">
+  <id>com.github.padjis.gcron</id>
+  <metadata_license>CC0</metadata_license>
+  <project_license>GPL-3.0+</project_license>
+  <name>Gcron</name>
+  <summary>Display, understand and edit your cron configuration</summary>
+  <releases>
+    <release version="0.0.1" date="2019-09-06">
+      <description>
+        <ul>
+          <li>Initial release</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
+  <provides>
+    <binary>com.github.padjis.gcron</binary>
+  </provides>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-cartoon">none</content_attribute>
+    <content_attribute id="violence-fantasy">none</content_attribute>
+    <content_attribute id="violence-realistic">none</content_attribute>
+    <content_attribute id="violence-bloodshed">none</content_attribute>
+    <content_attribute id="violence-sexual">none</content_attribute>
+    <content_attribute id="violence-desecration">none</content_attribute>
+    <content_attribute id="violence-slavery">none</content_attribute>
+    <content_attribute id="violence-worship">none</content_attribute>
+    <content_attribute id="drugs-alcohol">none</content_attribute>
+    <content_attribute id="drugs-narcotics">none</content_attribute>
+    <content_attribute id="drugs-tobacco">none</content_attribute>
+    <content_attribute id="sex-nudity">none</content_attribute>
+    <content_attribute id="sex-themes">none</content_attribute>
+    <content_attribute id="sex-homosexuality">none</content_attribute>
+    <content_attribute id="sex-prostitution">none</content_attribute>
+    <content_attribute id="sex-adultery">none</content_attribute>
+    <content_attribute id="sex-appearance">none</content_attribute>
+    <content_attribute id="language-profanity">none</content_attribute>
+    <content_attribute id="language-humor">none</content_attribute>
+    <content_attribute id="language-discrimination">none</content_attribute>
+    <content_attribute id="social-chat">none</content_attribute>
+    <content_attribute id="social-info">none</content_attribute>
+    <content_attribute id="social-audio">none</content_attribute>
+    <content_attribute id="social-location">none</content_attribute>
+    <content_attribute id="social-contacts">none</content_attribute>
+    <content_attribute id="money-purchasing">none</content_attribute>
+    <content_attribute id="money-gambling">none</content_attribute>
+  </content_rating>
+  <developer_name>padjis</developer_name>
+  <url type="homepage">https://github.com/padjis/gcron</url>
+  <url type="bugtracker">https://github.com/padjis/gcron/issues</url>
+  <url type="help">https://github.com/padjis/gcron/issues</url>
+  <update_contact>emmanuel@padjinou.com</update_contact>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/padjis/gcron/master/data/window-screenshot.png</image>
+    </screenshot>
+  </screenshots>
+  <custom>
+     <value key="x-appcenter-color-primary">#fff</value>
+     <value key="x-appcenter-color-primary-text">#333</value>
+     <value key="x-appcenter-suggested-price">0</value>
+  </custom>
+</component>
