@@ -12,6 +12,18 @@
     <p>Gcron is the solution for you, it is an easy to use graphic interface that edit the cron configuration of the current user as well as explains its content</p>
   </description>
   <releases>
+    <release version="1.0.0" date="2019-09-07">
+      <description>
+        <ul>
+          <li>Added log area to display messages</li>
+          <li>Cron jobs can be added</li>
+          <li>Cron jobs can be removed</li>
+          <li>Cron jobs can be explained</li>
+          <li>The application is initialized from the cron setup</li>
+          <li>The application can be reinitialized from the cron setup</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.0.1" date="2019-09-06">
       <description>
         <ul>
