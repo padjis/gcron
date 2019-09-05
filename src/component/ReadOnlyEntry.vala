@@ -18,17 +18,12 @@
  *
  */
 
-public class Application:Gtk.Application{
-    
-    public Application(){
+public class component.ReadOnlyEntry : Gtk.Entry{
+    public string content { get; construct;}
+    public ReadOnlyEntry(string content){
         Object(
-            application_id: "com.github.padjis.gcron",
-            flags: ApplicationFlags.FLAGS_NONE
+            text:content,
+            editable:false
         );
-    }
-    
-    protected override void activate(){
-        var window = new window.Window(this);
-        add_window(window);
     }
 }

@@ -1,3 +1,23 @@
+/*
+ *  Copyright (C) 2019 Emmanuel Padjinou
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ *  Authored by: Emmanuel Padjinou <emmanuel@padjinou.com>
+ *
+ */
+
 public const string describedDays[8] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
 public const string describedMonths[12] = {"January", "February", "March", "April", "May", "June", "July", 
@@ -26,13 +46,15 @@ public class util.Descriptor : GLib.Object{
     //returns -1 for a bad periodicity and -2 for a bad command
     public string explain(){
         string periodExplanation=getPeriodExplanation();
-        if(periodExplanation.has_prefix("-1")){
+        if(periodExplanation.contains("-1")){
             return periodExplanation;
         }
-        if(!isCommandValid()){
-            return "-2";
+        else if(!isCommandValid()){
+            return "-2 The command inserted is invalid";
+        }else{
+            periodExplanation=periodExplanation.strip();
+            return "'"+periodExplanation+"' run '"+command+"'";
         }
-        return periodExplanation+" run "+command;
     }
     
     private string getPeriodExplanation() {
@@ -55,7 +77,7 @@ public class util.Descriptor : GLib.Object{
     
     private string readAllCronExpression(){
         if(periodicity==null || !periodicity.contains(" "))
-            return "-1 empty periodicity";
+            return "-1 invalid period '"+periodicity+"'";
         string[] expressions=periodicity.split(" ");
         if(expressions.length!=5)
             return "-1 cron elements has not 5 elements";
@@ -63,7 +85,7 @@ public class util.Descriptor : GLib.Object{
         int i=0;
         foreach (var expression in expressions) {
             string partialResult=readCronExpression(expressions[i],i);
-            if(partialResult.has_prefix("-1")){
+            if(partialResult.contains("-1")){
                 return partialResult;
             }
             result+=partialResult;
@@ -80,8 +102,7 @@ public class util.Descriptor : GLib.Object{
         }
         if(result.contains(" on every day of week")){
             result=result.replace(" on every day of week","");
-        } 
-        //result=result._strip();
+        }
         return result;
     }
 
@@ -102,6 +123,119 @@ public class util.Descriptor : GLib.Object{
         return true;
     }
 
+    private bool isValidRangeExpression(string value,int periodPosition){
+        string[] expressions=value.split("-");
+
+        if(expressions.length!=2){
+            return false;
+        }
+        if(!isValidValue(expressions[0],periodPosition) || !isValidValue(expressions[1],periodPosition)){
+            return false;
+        }
+        return true;
+    }
+
+    private bool isValidPeriodExpression(string expression,int periodPosition){
+        string[] expressions=expression.split("/");
+            
+        if(expressions.length!=2){
+            return false;
+        }
+        if(!isValidValue(expressions[1],periodPosition)){
+            return false;
+        }
+        if(expressions[0].contains("-")){
+            if(!isValidRangeExpression(expressions[0],periodPosition)){
+                return false;
+            }
+        }
+        else if(expressions[0]!="*"){
+            return false;
+        }
+        return true;
+    }
+
+    private bool isValidCommaExpression(string value,int periodPosition){
+        string[] expressions=value.split(",");
+
+        if(expressions.length!=2){
+            return false;
+        }
+        if(!isValidValue(expressions[0],periodPosition) || !isValidValue(expressions[1],periodPosition)){
+            return false;
+        }
+        return true;
+    }
+
+    private bool isValidValue(string value,int periodPosition){
+        int intValue=int.parse(value);
+        if(periodPosition==0){
+            if(isZero(value)){
+                return true;
+            }else if(intValue<=59 && intValue>0){
+                return true;
+            }
+        }
+        else if(periodPosition==1){
+            if(isZero(value)){
+                return true;
+            }else if(intValue<=23 && intValue>0){
+                return true;
+            }
+        }
+        else if(periodPosition==2){
+            if(intValue<=31 || intValue>=1){
+                return true;
+            }
+        }
+        else if(periodPosition==3){
+            if(intValue==0 && !isZero(value)){
+                //we can have months here
+                foreach (var month in months) {
+                    if(month==value){
+                        return true;
+                    }
+                }
+            }else if(intValue<=12 || intValue>=1){
+                return true;
+            }
+        }
+        else if(periodPosition==4){
+            if(intValue==0 && !isZero(value)){
+                //we can have days here
+                foreach (var day in days) {
+                    if(day==value){
+                        return true;
+                    }
+                }
+            }else if(intValue<=6 || intValue>0 || isZero(value)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private bool isValidCronExpression(string expression,int periodPosition){
+        if(expression=="*"){
+            return true;
+        }else if(expression.contains("/")){
+            if(isValidPeriodExpression(expression,periodPosition)){
+                return true;
+            }
+        }else if(expression.contains("-")){
+            if(isValidRangeExpression(expression,periodPosition)){
+                return true;
+            }
+        }else if(expression.contains(",")){
+            if(isValidCommaExpression(expression,periodPosition)){
+                return true;
+            }
+        }else if(isValidValue(expression,periodPosition)){
+            return true;
+        }
+        return false;
+    }
+
     private string readCronExpression(string expressionSent,int periodPosition){
         string expression=expressionSent.down();
         string startWith="";
@@ -110,16 +244,19 @@ public class util.Descriptor : GLib.Object{
         }else{
             startWith=" at";
         }
+
+        if(!isValidCronExpression(expression,periodPosition)){
+            return "-1 Invalid cron expression";
+        }
+            
         if(expression=="*"){
             return startWith+" every "+periods[periodPosition];
         }else if(expression.contains("/")){
             string[] expressions=expression.split("/");
             
-            if(expressions.length!=2 || int.parse(expressions[1])==0){
-                return "-1 "+expression+" is not a valid reccurence";
-            }else if(expressions[0].contains("-")){
+            if(expressions[0].contains("-")){
                 startWith=readRangeCronExpression(expressions[0],periodPosition);
-                if(startWith.has_prefix("-1")){
+                if(startWith.contains("-1")){
                     return startWith;
                 }
             }
@@ -164,17 +301,12 @@ public class util.Descriptor : GLib.Object{
                         }
                     }else if(expression.contains("-")){
                         return readRangeCronExpression(expression,periodPosition);
-                    }else{
-                        return "-1 "+expression+" is not a valid cron part";
                     }
                   
                     
                 }else{
                     int value =int.parse(part);
-                    if(((value>59 || value<0) && periodPosition==0) || ((value>23 || value<0) && periodPosition==1) || ((value>31 || value<1) && periodPosition==2)
-                        || ((value>12 || value<1) && periodPosition==3) || ((value>8 || value<1) && periodPosition==4)){
-                            return "-1 "+expression+" contains data out of bound";
-                        }
+                
                     if(periodPosition==3){
                         part=describedMonths[value];
                         toReturn+=part;
@@ -209,10 +341,10 @@ public class util.Descriptor : GLib.Object{
 	    }
     }
     
-    public static int main(string[] args){
+    /*public static int main(string[] args){
         Descriptor descriptor=new Descriptor("23 1-20/2 * * *","/usr/bin/ls");
         //if(descriptor.isZero("0000"))
         print(descriptor.explain());
         return 0;
-    }
+    } */
 }
