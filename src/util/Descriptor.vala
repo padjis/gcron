@@ -184,7 +184,7 @@ public class util.Descriptor : GLib.Object{
             }
         }
         else if(periodPosition==2){
-            if(intValue<=31 || intValue>=1){
+            if(intValue<=31 && intValue>=1){
                 return true;
             }
         }
@@ -196,7 +196,7 @@ public class util.Descriptor : GLib.Object{
                         return true;
                     }
                 }
-            }else if(intValue<=12 || intValue>=1){
+            }else if(intValue<=12 && intValue>=1){
                 return true;
             }
         }
@@ -208,7 +208,7 @@ public class util.Descriptor : GLib.Object{
                         return true;
                     }
                 }
-            }else if(intValue<=6 || intValue>0 || isZero(value)){
+            }else if((intValue<=6 && intValue>0) || isZero(value)){
                 return true;
             }
         }
