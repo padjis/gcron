@@ -28,7 +28,7 @@ public class component.button.EmptyLineButton : Gtk.Button{
 
     public EmptyLineButton(ListBox listBox,Gtk.Entry expressionEntry,Gtk.Entry commandEntry,Cron cron){
         Object(
-            label:"Add new cron line",
+            label:"Add new cron job",
             listBox:listBox,
             expressionEntry:expressionEntry,
             commandEntry:commandEntry,

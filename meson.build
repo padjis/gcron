@@ -14,6 +14,15 @@ conf_data.set_quoted('GETTEXT_PACKAGE', meson.project_name())
 conf_data.set_quoted('VERSION', meson.project_version())
 conf_data.set_quoted('PREFIX', get_option('prefix'))
 
+gnome = import('gnome')
+
+# Include GResource
+asresources = gnome.compile_resources(
+    'as-resources', join_paths('data', 'com.github.padjis.gcron.gresource.xml'),
+    source_dir: 'data',
+    c_name: 'as'
+)
+
 message('Configuring desktop entry: ' + meson.project_name() + '.desktop')
 
 executable(
@@ -30,6 +39,7 @@ executable(
     'src/component/button/DeleteButton.vala',
     'src/util/Descriptor.vala',
     'src/util/Cron.vala',
+    asresources,
     dependencies: [
         dependency('gtk+-3.0'),
         dependency('gio-2.0')

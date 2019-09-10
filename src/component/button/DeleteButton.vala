@@ -32,6 +32,7 @@ public class component.button.DeleteButton : Gtk.Button{
             cron:cron
         );
         clicked.connect (this.delete);
+        this.get_style_context ().add_class ("red-button");
     }
 
     public void delete(){
