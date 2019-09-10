@@ -12,6 +12,14 @@
     <p>Gcron is the solution for you, it is an easy to use graphic interface that edit the cron configuration of the current user as well as explains its content</p>
   </description>
   <releases>
+  <release version="1.0.1" date="2019-09-11">
+      <description>
+        <ul>
+          <li>Delete button red</li>
+          <li>Bold logs error messages</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.0" date="2019-09-07">
       <description>
         <ul>
