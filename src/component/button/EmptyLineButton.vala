@@ -28,7 +28,7 @@ public class component.button.EmptyLineButton : Gtk.Button{
 
     public EmptyLineButton(ListBox listBox,Gtk.Entry expressionEntry,Gtk.Entry commandEntry,Cron cron){
         Object(
-            label:"Add new cron line",
+            label:"Add new cron job",
             listBox:listBox,
             expressionEntry:expressionEntry,
             commandEntry:commandEntry,
@@ -39,11 +39,11 @@ public class component.button.EmptyLineButton : Gtk.Button{
 
     public void log(){
         string result=cron.writeCronFromUI(expressionEntry,commandEntry);
-        if(result.contains("-")){
-            if(result.contains("-1 ")){
-                result=result.replace("-1 ","");
-            }else if(result.contains("-2 ")){
-                result=result.replace("-2 ","");
+        if(result.contains("<>")){
+            if(result.contains("<>1 ")){
+                result=result.replace("<>1 ","");
+            }else if(result.contains("<>2 ")){
+                result=result.replace("<>2 ","");
             }
             listBox.add_error_log(result);
         }else{

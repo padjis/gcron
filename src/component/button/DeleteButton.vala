@@ -32,16 +32,17 @@ public class component.button.DeleteButton : Gtk.Button{
             cron:cron
         );
         clicked.connect (this.delete);
+        this.get_style_context ().add_class ("red-button");
     }
 
     public void delete(){
         string result = cron.deleteCron(position);
-        if(result.contains("-")){
+        if(result.contains("<>")){
             //error
-            if(result.contains("-1 ")){
-                result =result.replace("-1 ","");
-            }else if(result.contains("-2 ")){
-                result =result.replace("-2 ","");
+            if(result.contains("<>1 ")){
+                result =result.replace("<>1 ","");
+            }else if(result.contains("<>2 ")){
+                result =result.replace("<>2 ","");
             }
             listBox.add_error_log(result);
         }else{

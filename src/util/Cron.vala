@@ -28,7 +28,7 @@ public class util.Cron : GLib.Object{
         string command=commandEntry.text;
         Descriptor descriptor=new Descriptor(expression,command);
         string result=descriptor.explain();
-        if(result.contains("-")){
+        if(result.contains("<>")){
             return result;
         }
             
@@ -152,7 +152,7 @@ public class util.Cron : GLib.Object{
         }
         catch (SpawnError e) {
             warning ("Error encountered while executing [" + command + "]:\n"+ std_err);
-            return "-1";
+            return "<>1";
         }
     
         return std_out;
