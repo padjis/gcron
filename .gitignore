@@ -6,3 +6,5 @@ src/Main.vala~
 src/window/Window.vala~
 src/util/Descriptor.vala~
 src/util/Descriptor
+
+.project
