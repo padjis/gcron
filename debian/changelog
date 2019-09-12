@@ -1,0 +1,16 @@
+com.github.padjis.gcron (1.0.0) bionic; urgency=high
+
+  * Added log area to display messages
+  * Cron jobs can be added
+  * Cron jobs can be removed
+  * Cron jobs can be explained
+  * The application is initialized from the cron setup
+  * The application can be reinitialized from the cron setup
+
+ -- Emmanuel Padjinou <emmanuel@padjinou.com>  Sat, 07 Sep 2019 00:00:00 +0000
+
+com.github.padjis.gcron (0.0.1) bionic; urgency=medium
+
+  * Initial Release.
+
+ -- Emmanuel Padjinou <emmanuel@padjinou.com>  Fri, 06 Sep 2019 00:00:00 +0000
