@@ -1,3 +1,16 @@
+com.github.padjis.gcron (1.0.2) bionic; urgency=high
+
+  * Icon redesign
+
+ -- Emmanuel Padjinou <emmanuel@padjinou.com>  Sat, 14 Sep 2019 00:00:00 +0000
+
+com.github.padjis.gcron (1.0.1) bionic; urgency=medium
+
+  * Delete button red
+  * Bold logs error messages
+
+ -- Emmanuel Padjinou <emmanuel@padjinou.com>  Wed, 11 Sep 2019 00:00:00 +0000
+
 com.github.padjis.gcron (1.0.0) bionic; urgency=high
 
   * Added log area to display messages

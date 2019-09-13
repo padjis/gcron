@@ -1,4 +1,4 @@
-project('com.github.padjis.gcron','vala','c', version: '1.0.1')
+project('com.github.padjis.gcron','vala','c', version: '1.0.2')
 
 config_data = configuration_data()
 config_data.set('EXEC_NAME', meson.project_name())
