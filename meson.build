@@ -29,6 +29,7 @@ executable(
     meson.project_name(),
     'src/Main.vala',
     'src/Application.vala',
+    'src/widgets/HeaderBar.vala',
     'src/window/Window.vala',
     'src/component/Grid.vala',
     'src/component/ListBox.vala',

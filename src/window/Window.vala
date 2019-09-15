@@ -22,18 +22,25 @@ using component;
 using Gtk;
 using util;
 public class window.Window : ApplicationWindow{
+
+    private Gcron.Widgets.HeaderBar headerbar;
+
     public Window(Application application){
         Object(
             application:application,
             resizable:false
         );
     }
-    
+
     construct{
         title="Gcron";
-        window_position = WindowPosition.CENTER; 
+        window_position = WindowPosition.CENTER;
         set_default_size(575,200);
         set_border_width(10);
+
+        this.headerbar = new Gcron.Widgets.HeaderBar ();
+        this.headerbar.cron_refresh.connect (reset);
+        this.set_titlebar (this.headerbar);
 
         Gtk.Box box=new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
 
@@ -41,7 +48,7 @@ public class window.Window : ApplicationWindow{
 
         component.ListBox listBox=new component.ListBox(this);
         listBox.add_info_log("The system will display messages here");
-        
+
         frame2.add(listBox);
 
         Cron cron=new Cron();
@@ -60,16 +67,16 @@ public class window.Window : ApplicationWindow{
         Gtk.Frame frame1=new Gtk.Frame("Current user cron setup");
         frame1.add(grid);
 
-        Gtk.Button buttonReload= new Gtk.Button.with_label ("Reload the cron config");
-        buttonReload.get_style_context ().add_class ("main-button");
-        buttonReload.clicked.connect (reset);
+        //  Gtk.Button buttonReload= new Gtk.Button.with_label ("Reload the cron config");
+        //  buttonReload.get_style_context ().add_class ("main-button");
+        //  buttonReload.clicked.connect (reset);
 
         Gtk.Button buttonClear= new Gtk.Button.with_label ("Clear the message logs");
         buttonClear.get_style_context ().add_class ("main-button");
         buttonClear.clicked.connect (listBox.reset);
 
-        box.pack_start (buttonReload, false, false, 0);
-        box.pack_start (new Gtk.Label(""), false, false, 0);
+        //  box.pack_start (buttonReload, false, false, 0);
+        //  box.pack_start (new Gtk.Label(""), false, false, 0);
         box.pack_start (frame1, false, false, 0);
         box.pack_start (new Gtk.Label(""), false, false, 0);
         box.pack_start (buttonClear, false, false, 0);

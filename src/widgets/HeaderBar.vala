@@ -18,27 +18,25 @@
  *
  */
 
-public class Application:Gtk.Application{
+public class Gcron.Widgets.HeaderBar : Gtk.HeaderBar {
 
-    public Application(){
-        Object(
-            application_id: "com.github.padjis.gcron",
-            flags: ApplicationFlags.FLAGS_NONE
+    public signal void cron_refresh ();
+
+    public HeaderBar () {
+        Object (
+            has_subtitle: false,
+            show_close_button: true,
+            title: "Gcron"
         );
     }
+    construct {
+        var refresh_button = new Gtk.Button.from_icon_name ("view-refresh", Gtk.IconSize.BUTTON);
+        refresh_button.tooltip_text = "Reload cron config";
+        refresh_button.clicked.connect (() => {
+            cron_refresh ();
+        });
 
-    protected override void activate(){
-        var window = new window.Window(this);
-        add_window(window);
-
-
-        var provider = new Gtk.CssProvider ();
-        provider.load_from_resource ("/com/github/padjis/gcron/Application.css");
-        Gtk.StyleContext.add_provider_for_screen (
-            Gdk.Screen.get_default (),
-            provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-        );
-
+        pack_start (refresh_button);
     }
+
 }
