@@ -19,7 +19,6 @@
  */
 
 public class Gcron.Widgets.HeaderBar : Gtk.HeaderBar {
-
     public signal void cron_refresh ();
 
     public HeaderBar () {
@@ -29,6 +28,7 @@ public class Gcron.Widgets.HeaderBar : Gtk.HeaderBar {
             title: "Gcron"
         );
     }
+
     construct {
         var refresh_button = new Gtk.Button.from_icon_name ("view-refresh", Gtk.IconSize.BUTTON);
         refresh_button.tooltip_text = "Reload cron config";
@@ -38,5 +38,4 @@ public class Gcron.Widgets.HeaderBar : Gtk.HeaderBar {
 
         pack_start (refresh_button);
     }
-
 }
