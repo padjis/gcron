@@ -18,36 +18,26 @@
  *
  */
 
-using component;
-using util;
-public class component.button.DeleteButton : Gtk.Button{
+using widgets;
+public class widgets.button.DisplayButton : Gtk.Button{
+    public Gtk.Label expressionLabel { get; construct;}
+    public Gtk.Label commandLabel { get; construct;}
     public ListBox listBox { get; construct;}
-    public int position { get; construct;}
-    public Cron cron { get; construct;}
-    public DeleteButton(ListBox listBox,int position,Cron cron){
+    public DisplayButton(ListBox listBox,Gtk.Label expressionLabel,Gtk.Label commandLabel){
         Object(
-            label:"Delete",
+            label:"Display",
             listBox:listBox,
-            position:position,
-            cron:cron
+            expressionLabel:expressionLabel,
+            commandLabel:commandLabel
         );
-        clicked.connect (this.delete);
-        this.get_style_context ().add_class ("red-button");
+        clicked.connect (this.log);
     }
 
-    public void delete(){
-        string result = cron.deleteCron(position);
-        if(result.contains("<>")){
-            //error
-            if(result.contains("<>1 ")){
-                result =result.replace("<>1 ","");
-            }else if(result.contains("<>2 ")){
-                result =result.replace("<>2 ","");
-            }
-            listBox.add_error_log(result);
+    public void log(){
+        if(expressionLabel.get_text ()==null || expressionLabel.get_text ().strip()=="" || commandLabel.get_text ()==null || commandLabel.get_text ().strip()==""){
+            listBox.add_error_log("Cron expression or command empty");
         }else{
-            //listBox.add_info_log(result);
-            listBox.window.reset();
+            listBox.add_info_log(expressionLabel.get_text ()+" "+commandLabel.get_text ());
         }
     }
 }

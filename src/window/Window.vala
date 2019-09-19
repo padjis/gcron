@@ -18,7 +18,7 @@
  *
  */
 
-using component;
+using widgets;
 using Gtk;
 using util;
 public class window.Window : ApplicationWindow{
@@ -46,14 +46,14 @@ public class window.Window : ApplicationWindow{
 
         Gtk.Frame frame2=new Gtk.Frame("Message logs");
 
-        component.ListBox listBox=new component.ListBox(this);
+        widgets.ListBox listBox=new widgets.ListBox(this);
         listBox.add_info_log("The system will display messages here");
 
         frame2.add(listBox);
 
         Cron cron=new Cron();
         Array<Array<string>> result=cron.readCron();
-        component.Grid grid=new component.Grid(listBox,result.length,cron);
+        widgets.Grid grid=new widgets.Grid(listBox,result.length,cron);
         for (int i = 0; i < result.length ; i++) {
             grid.add_full_line(result.index(i).index(0),result.index(i).index(1));
         }

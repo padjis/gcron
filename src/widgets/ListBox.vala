@@ -18,7 +18,7 @@
  *
  */
 
-public class component.ListBox : Gtk.ListBox{
+public class widgets.ListBox : Gtk.ListBox{
 
     public window.Window window { get; set;}
 

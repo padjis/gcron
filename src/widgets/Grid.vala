@@ -18,9 +18,9 @@
  *
  */
 
-using component.button;
+using widgets.button;
 using util;
-public class component.Grid : Gtk.Grid{
+public class widgets.Grid : Gtk.Grid{
 
     public int position { get; set;}
     public int space { get; set;}

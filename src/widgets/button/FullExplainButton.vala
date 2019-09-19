@@ -18,9 +18,9 @@
  *
  */
 
-using component;
+using widgets;
 using util;
-public class component.button.FullExplainButton : Gtk.Button{
+public class widgets.button.FullExplainButton : Gtk.Button{
     public ListBox listBox { get; construct;}
     public Descriptor descriptor { get; construct;}
     public FullExplainButton(ListBox listBox,string expression,string command){
