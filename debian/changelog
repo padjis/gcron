@@ -1,3 +1,9 @@
+com.github.padjis.gcron (1.0.3) bionic; urgency=high
+
+  * App redesign
+
+ -- Emmanuel Padjinou <emmanuel@padjinou.com>  Sat, 21 Sep 2019 00:00:00 +0000
+
 com.github.padjis.gcron (1.0.2) bionic; urgency=high
 
   * Icon redesign
