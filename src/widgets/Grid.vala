@@ -18,9 +18,10 @@
  *
  */
 
-using widgets.button;
-using util;
-public class widgets.Grid : Gtk.Grid{
+using Widgets.Buttons;
+using Util;
+
+public class Widgets.Grid : Gtk.Grid{
 
     public int position { get; set;}
     public int space { get; set;}

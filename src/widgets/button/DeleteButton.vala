@@ -18,9 +18,9 @@
  *
  */
 
-using widgets;
-using util;
-public class widgets.button.DeleteButton : Gtk.Button{
+using Widgets;
+using Util;
+public class Widgets.Buttons.DeleteButton : Gtk.Button{
     public ListBox listBox { get; construct;}
     public int position { get; construct;}
     public Cron cron { get; construct;}

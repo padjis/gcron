@@ -34,7 +34,7 @@ public const string days[8] = {"sun", "mon", "tue", "wed", "thu", "fri", "sat", 
 public const string months[12] = {"jan", "feb", "mar", "apr", "may", "jun",
                                                  "jul", "aug", "sep", "oct", "nov", "dec"};
 
-public class util.Descriptor : GLib.Object{  
+public class Util.Descriptor : GLib.Object{  
     string periodicity;
     string command;
     

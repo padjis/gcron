@@ -18,7 +18,7 @@
  *
  */
 
-public class widgets.ReadOnlyEntry : Gtk.Entry{
+public class Widgets.ReadOnlyEntry : Gtk.Entry{
     public string content { get; construct;}
     public ReadOnlyEntry(string content){
         Object(

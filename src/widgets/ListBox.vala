@@ -18,11 +18,11 @@
  *
  */
 
-public class widgets.ListBox : Gtk.ListBox{
+public class Widgets.ListBox : Gtk.ListBox{
 
-    public window.Window window { get; set;}
+    public Window.Window window { get; set;}
 
-    public ListBox(window.Window window){
+    public ListBox(Window.Window window){
         Object(
             window:window
         );

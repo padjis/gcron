@@ -18,10 +18,10 @@
  *
  */
 
-using widgets;
+using Widgets;
 using Gtk;
-using util;
-public class window.Window : ApplicationWindow{
+using Util;
+public class Window.Window : ApplicationWindow{
 
     private Gcron.Widgets.HeaderBar headerbar;
 
@@ -46,14 +46,14 @@ public class window.Window : ApplicationWindow{
 
         Gtk.Frame frame2=new Gtk.Frame("Message logs");
 
-        widgets.ListBox listBox=new widgets.ListBox(this);
+        Widgets.ListBox listBox=new Widgets.ListBox(this);
         listBox.add_info_log("The system will display messages here");
 
         frame2.add(listBox);
 
         Cron cron=new Cron();
         Array<Array<string>> result=cron.readCron();
-        widgets.Grid grid=new widgets.Grid(listBox,result.length,cron);
+        Widgets.Grid grid=new Widgets.Grid(listBox,result.length,cron);
         for (int i = 0; i < result.length ; i++) {
             grid.add_full_line(result.index(i).index(0),result.index(i).index(1));
         }

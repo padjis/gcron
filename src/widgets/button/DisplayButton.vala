@@ -18,8 +18,8 @@
  *
  */
 
-using widgets;
-public class widgets.button.DisplayButton : Gtk.Button{
+using Widgets;
+public class Widgets.Buttons.DisplayButton : Gtk.Button{
     public Gtk.Label expressionLabel { get; construct;}
     public Gtk.Label commandLabel { get; construct;}
     public ListBox listBox { get; construct;}

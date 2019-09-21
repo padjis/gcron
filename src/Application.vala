@@ -28,7 +28,7 @@ public class Application:Gtk.Application{
     }
 
     protected override void activate(){
-        var window = new window.Window(this);
+        var window = new Window.Window(this);
         add_window(window);
 
 

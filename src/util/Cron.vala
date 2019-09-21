@@ -18,7 +18,7 @@
  *
  */
 
-public class util.Cron : GLib.Object{
+public class Util.Cron : GLib.Object{
 
     string cronContent="";
     Array<Array<string>> contentAsArray;
