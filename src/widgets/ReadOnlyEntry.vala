@@ -18,12 +18,12 @@
  *
  */
 
-public class Gcron.Widgets.ReadOnlyEntry : Gtk.Entry{
+public class Gcron.Widgets.ReadOnlyEntry : Gtk.Entry {
     public string content { get; construct;}
-    public ReadOnlyEntry(string content){
-        Object(
-            text:content,
-            editable:false
+    public ReadOnlyEntry (string content) {
+        Object (
+            text: content,
+            editable: false
         );
     }
 }

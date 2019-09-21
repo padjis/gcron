@@ -18,19 +18,18 @@
  *
  */
 
-public class Application:Gtk.Application{
+public class Gcron.Application : Gtk.Application {
 
-    public Application(){
-        Object(
+    public Application () {
+        Object (
             application_id: "com.github.padjis.gcron",
             flags: ApplicationFlags.FLAGS_NONE
         );
     }
 
-    protected override void activate(){
-        var window = new Gcron.Window(this);
+    protected override void activate () {
+        var window = new Gcron.Window (this);
         add_window(window);
-
 
         var provider = new Gtk.CssProvider ();
         provider.load_from_resource ("/com/github/padjis/gcron/Application.css");
@@ -39,6 +38,5 @@ public class Application:Gtk.Application{
             provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         );
-
     }
 }

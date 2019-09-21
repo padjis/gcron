@@ -21,69 +21,71 @@
 using Gcron.Widgets;
 using Gtk;
 using Gcron.Util;
-public class Gcron.Window : ApplicationWindow{
+
+public class Gcron.Window : ApplicationWindow {
 
     private Gcron.Widgets.HeaderBar headerbar;
 
-    public Window(Application application){
-        Object(
-            application:application,
-            resizable:false
+    public Window (Application application) {
+        Object (
+            application: application,
+            resizable: false
         );
     }
 
-    construct{
-        title="Gcron";
+    construct {
+        title = "Gcron";
         window_position = WindowPosition.CENTER;
-        set_default_size(575,200);
-        set_border_width(10);
+        set_default_size (575, 200);
+        set_border_width (10);
 
         this.headerbar = new Gcron.Widgets.HeaderBar ();
         this.headerbar.cron_refresh.connect (reset);
         this.set_titlebar (this.headerbar);
 
-        Gtk.Box box=new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
+        Gtk.Box box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
 
-        Gtk.Frame frame2=new Gtk.Frame("Message logs");
+        Gtk.Frame frame2 = new Gtk.Frame ("Message logs");
 
-        Widgets.ListBox listBox=new Widgets.ListBox(this);
-        listBox.add_info_log("The system will display messages here");
+        Widgets.ListBox listBox = new Widgets.ListBox (this);
+        listBox.add_info_log ("The system will display messages here");
 
-        frame2.add(listBox);
+        frame2.add (listBox);
 
-        Cron cron=new Cron();
-        Array<Array<string>> result=cron.readCron();
-        Widgets.Grid grid=new Widgets.Grid(listBox,result.length,cron);
-        for (int i = 0; i < result.length ; i++) {
-            grid.add_full_line(result.index(i).index(0),result.index(i).index(1));
+        Cron cron=new Cron ();
+        Array<Array<string>> result = cron.readCron ();
+        Widgets.Grid grid = new Widgets.Grid (listBox, result.length,cron);
+
+        for (int i = 0; i < result.length; i++) {
+            grid.add_full_line (result.index (i).index (0), result.index (i).index (1));
         }
 
-        if(result.length!=0){
-            grid.add_space();
+        if (result.length != 0) {
+            grid.add_space ();
         }
 
-        grid.add_empty_line();
+        grid.add_empty_line ();
 
-        Gtk.Frame frame1=new Gtk.Frame("Current user cron setup");
-        frame1.add(grid);
+        Gtk.Frame frame1 = new Gtk.Frame ("Current user cron setup");
+        frame1.add (grid);
 
-        Gtk.Button buttonClear= new Gtk.Button.with_label ("Clear the message logs");
+        Gtk.Button buttonClear = new Gtk.Button.with_label ("Clear the message logs");
         buttonClear.get_style_context ().add_class ("main-button");
         buttonClear.clicked.connect (listBox.reset);
 
         box.pack_start (frame1, false, false, 0);
-        box.pack_start (new Gtk.Label(""), false, false, 0);
+        box.pack_start (new Gtk.Label (""), false, false, 0);
         box.pack_start (buttonClear, false, false, 0);
-        box.pack_start (new Gtk.Label(""), false, false, 0);
+        box.pack_start (new Gtk.Label (""), false, false, 0);
         box.pack_start (frame2, false, false, 0);
 
-        add(box);
+        add (box);
 
-        show_all();
+        show_all ();
     }
 
-    public void reset(){
-        close();
-        application.activate();
+    public void reset () {
+        close ();
+        application.activate ();
     }
 }
