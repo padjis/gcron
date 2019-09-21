@@ -29,7 +29,7 @@ public class Gcron.Application : Gtk.Application {
 
     protected override void activate () {
         var window = new Gcron.Window (this);
-        add_window(window);
+        add_window (window);
 
         var provider = new Gtk.CssProvider ();
         provider.load_from_resource ("/com/github/padjis/gcron/Application.css");
