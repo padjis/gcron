@@ -18,10 +18,10 @@
  *
  */
 
-using Widgets.Buttons;
-using Util;
+using Gcron.Widgets.Buttons;
+using Gcron.Util;
 
-public class Widgets.Grid : Gtk.Grid{
+public class Gcron.Widgets.Grid : Gtk.Grid{
 
     public int position { get; set;}
     public int space { get; set;}

@@ -18,9 +18,9 @@
  *
  */
 
-using Widgets;
-using Util;
-public class Widgets.Buttons.EmptyLineButton : Gtk.Button{
+using Gcron.Widgets;
+using Gcron.Util;
+public class Gcron.Widgets.Buttons.EmptyLineButton : Gtk.Button{
     public Gtk.Entry expressionEntry { get; construct;}
     public Gtk.Entry commandEntry { get; construct;}
     public ListBox listBox { get; construct;}

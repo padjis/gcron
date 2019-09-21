@@ -18,11 +18,11 @@
  *
  */
 
-public class Widgets.ListBox : Gtk.ListBox{
+ public class Gcron.Widgets.ListBox : Gtk.ListBox{
 
-    public Window.Window window { get; set;}
+    public Gcron.Window window { get; set;}
 
-    public ListBox(Window.Window window){
+    public ListBox(Gcron.Window window){
         Object(
             window:window
         );

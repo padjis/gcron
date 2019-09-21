@@ -18,10 +18,10 @@
  *
  */
 
-using Widgets;
+using Gcron.Widgets;
 using Gtk;
-using Util;
-public class Window.Window : ApplicationWindow{
+using Gcron.Util;
+public class Gcron.Window : ApplicationWindow{
 
     private Gcron.Widgets.HeaderBar headerbar;
 
