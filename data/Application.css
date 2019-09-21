@@ -23,6 +23,11 @@
     background-color: darkred;
 }
 
+.gray-button {
+    color: white;
+    background-color: gray;
+}
+
 .main-button {
     font-size: large;
 }

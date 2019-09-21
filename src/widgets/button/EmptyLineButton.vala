@@ -35,6 +35,7 @@ public class widgets.button.EmptyLineButton : Gtk.Button{
             cron:cron
         );
         clicked.connect (this.log);
+        this.get_style_context ().add_class ("gray-button");
     }
 
     public void log(){
