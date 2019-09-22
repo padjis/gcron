@@ -66,7 +66,7 @@ public class Gcron.Window : ApplicationWindow {
 
         grid.add_empty_line ();
 
-        Gtk.Frame frame1 = new Gtk.Frame ("Current user cron setup");
+        Gtk.Frame frame1 = new Gtk.Frame (GLib.Environment.get_user_name ()+"'s cron setup");
         frame1.add (grid);
 
         Gtk.Button buttonClear = new Gtk.Button.with_label ("Clear the message logs");
