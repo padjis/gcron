@@ -29,7 +29,7 @@ public class Gcron.Widgets.Buttons.EmptyLineButton : Gtk.Button {
 
     public EmptyLineButton (ListBox listBox, Gtk.Entry expressionEntry, Gtk.Entry commandEntry, Cron cron) {
         Object (
-            label: "Add new cron job",
+            label: _("Add new cron job"),
             listBox: listBox,
             expressionEntry: expressionEntry,
             commandEntry: commandEntry,

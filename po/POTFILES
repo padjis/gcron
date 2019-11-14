@@ -1,5 +1,10 @@
-src/Main.vala
-src/Application.vala
-src/window/Window.vala
-src/util/Descriptor.vala
-src/grid/Grid.vala
+src/Window/Window.vala
+
+src/Widgets/Buttons/DeleteButton.vala
+src/Widgets/Buttons/DisplayButton.vala
+src/Widgets/Buttons/EmptyLineButton.vala
+src/Widgets/Buttons/FullExplainButton.vala
+
+src/Widgets/Grid.vala
+src/Widgets/HeaderBar.vala
+src/Widgets/ListBox.vala

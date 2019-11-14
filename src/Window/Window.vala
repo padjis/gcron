@@ -45,10 +45,10 @@ public class Gcron.Window : ApplicationWindow {
 
         Gtk.Box box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
 
-        Gtk.Frame frame2 = new Gtk.Frame ("Message logs");
+        Gtk.Frame frame2 = new Gtk.Frame (_("Message logs"));
 
         Widgets.ListBox listBox = new Widgets.ListBox (this);
-        listBox.add_info_log ("The system will display messages here");
+        listBox.add_info_log (_("The system will display messages here"));
 
         frame2.add (listBox);
 
@@ -66,10 +66,10 @@ public class Gcron.Window : ApplicationWindow {
 
         grid.add_empty_line ();
 
-        Gtk.Frame frame1 = new Gtk.Frame (GLib.Environment.get_user_name ()+"'s cron setup");
+        Gtk.Frame frame1 = new Gtk.Frame (_("%s's cron setup").printf(GLib.Environment.get_user_name ()));
         frame1.add (grid);
 
-        Gtk.Button buttonClear = new Gtk.Button.with_label ("Clear the message logs");
+        Gtk.Button buttonClear = new Gtk.Button.with_label (_("Clear the message logs"));
         buttonClear.get_style_context ().add_class ("main-button");
         buttonClear.clicked.connect (listBox.reset);
 
