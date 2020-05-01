@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/padjis/gcron.svg?branch=master)](https://travis-ci.org/padjis/gcron)
 
 <p align="center">
-    <img src="data/128/com.github.padjis.gcron.svg" alt="Icon" />
+    <img src="data/icons/128/com.github.padjis.gcron.svg" alt="Icon" />
 </p>
 
 <h1 align="center">Gcron</h1>
