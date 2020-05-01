@@ -40,7 +40,7 @@ public class Gcron.Widgets.Grid : Gtk.Grid {
             linePosition: 0
         );
         if (numberOfLines == 0) {
-            listBox.add_info_log ("No cron setup found, create a new cron");
+            listBox.add_info_log (_("No cron setup found, create a new cron"));
         }
         add_space ();
         add_explanation_line ();
@@ -48,13 +48,13 @@ public class Gcron.Widgets.Grid : Gtk.Grid {
     }
 
     public void add_explanation_line () {
-        var expressionLabel = new Gtk.Label ("-CRON EXPRESSION-");
+        var expressionLabel = new Gtk.Label ("-" + _("CRON EXPRESSION") + "-");
         attach (expressionLabel, 0, position * space);
 
         var label2 = new Gtk.Label ("\t");
         attach_next_to (label2, expressionLabel, Gtk.PositionType.RIGHT);
 
-        var commandLabel = new Gtk.Label ("-CRON COMMAND-");
+        var commandLabel = new Gtk.Label ("-" + _("CRON COMMAND") + "-");
         attach_next_to (commandLabel, label2, Gtk.PositionType.RIGHT);
 
         position++;

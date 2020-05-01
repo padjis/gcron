@@ -35,14 +35,14 @@ public class Gcron.Widgets.ListBox : Gtk.ListBox {
 
     public void reset () {
         this.foreach ((element) => this.remove (element));
-        add_info_log ("The system will display messages here");
+        add_info_log (_("The system will display messages here"));
         window.resize (1, 1);
         window.show_all ();
     }
 
     public void add_info_log (string text) {
         Gtk.Box box=new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
-        var entry = new ReadOnlyEntry (getDate () + " - [Info] " + text);
+        var entry = new ReadOnlyEntry (getDate () + " - [" + _("Info") + "] " + text);
         box.pack_start (entry, true, true, 0);
         prepend (box);
         window.show_all ();
@@ -50,7 +50,7 @@ public class Gcron.Widgets.ListBox : Gtk.ListBox {
 
     public void add_error_log (string text) {
         Gtk.Box box=new Gtk.Box (Gtk.Orientation.HORIZONTAL,0);
-        var entry = new ReadOnlyEntry (getDate () + " - [Error] " + text);
+        var entry = new ReadOnlyEntry (getDate () + " - [" + _("Error") + "] " + text);
         entry.get_style_context ().add_class ("error-message");
         box.pack_start (entry, true, true, 0);
         prepend (box);

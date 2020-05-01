@@ -31,7 +31,7 @@ public class Gcron.Widgets.HeaderBar : Gtk.HeaderBar {
 
     construct {
         var refresh_button = new Gtk.Button.from_icon_name ("view-refresh", Gtk.IconSize.BUTTON);
-        refresh_button.tooltip_text = "Reload cron config";
+        refresh_button.tooltip_text = _("Reload cron config");
         refresh_button.clicked.connect (() => {
             cron_refresh ();
         });

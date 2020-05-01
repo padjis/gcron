@@ -26,7 +26,7 @@ public class Gcron.Widgets.Buttons.FullExplainButton : Gtk.Button {
     public Descriptor descriptor { get; construct;}
     public FullExplainButton (ListBox listBox, string expression, string command) {
         Object (
-            label: "Explain",
+            label: _("Explain"),
             listBox: listBox,
             descriptor: new Descriptor (expression, command)
         );
