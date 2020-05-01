@@ -1,0 +1,79 @@
+# French translations for com.github.padjis.gcron package.
+# Copyright (C) 2020 THE com.github.padjis.gcron'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.padjis.gcron package.
+# Nathan Bonnemains (@NathanBnm), 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: com.github.padjis.gcron\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-01 16:58+0200\n"
+"PO-Revision-Date: 2020-05-01 16:50+0200\n"
+"Last-Translator: Nathan Bonnemains (@NathanBnm)\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: src/Window/Window.vala:48
+msgid "Message logs"
+msgstr "Journaux des messages"
+
+#: src/Window/Window.vala:51 src/Widgets/ListBox.vala:38
+msgid "The system will display messages here"
+msgstr "Le système affichera les messages ici"
+
+#: src/Window/Window.vala:69
+#, c-format
+msgid "%s's cron setup"
+msgstr "Configuration cron de %s"
+
+#: src/Window/Window.vala:72
+msgid "Clear the message logs"
+msgstr "Effacer les journaux des messages"
+
+#: src/Widgets/Buttons/DeleteButton.vala:29
+msgid "Delete"
+msgstr "Supprimer"
+
+#: src/Widgets/Buttons/DisplayButton.vala:28
+msgid "Display"
+msgstr "Afficher"
+
+#: src/Widgets/Buttons/DisplayButton.vala:42
+msgid "Cron expression or command empty"
+msgstr "Expression cron ou commande vide"
+
+#: src/Widgets/Buttons/EmptyLineButton.vala:32
+msgid "Add new cron job"
+msgstr "Ajouter une nouvelle tâche cron"
+
+#: src/Widgets/Buttons/FullExplainButton.vala:29
+msgid "Explain"
+msgstr "Expliquer"
+
+#: src/Widgets/Grid.vala:43
+msgid "No cron setup found, create a new cron"
+msgstr "Aucune configuration cron trouvée, créez une nouvelle tâche cron"
+
+#: src/Widgets/Grid.vala:51
+msgid "CRON EXPRESSION"
+msgstr "EXPRESSION CRON"
+
+#: src/Widgets/Grid.vala:57
+msgid "CRON COMMAND"
+msgstr "COMMANDE CRON"
+
+#: src/Widgets/HeaderBar.vala:34
+msgid "Reload cron config"
+msgstr "Recharger la configuration cron"
+
+#: src/Widgets/ListBox.vala:45
+msgid "Info"
+msgstr "Info"
+
+#: src/Widgets/ListBox.vala:53
+msgid "Error"
+msgstr "Erreur"
