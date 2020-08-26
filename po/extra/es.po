@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the extra package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: extra\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-14 15:13+0100\n"
+"PO-Revision-Date: 2020-05-03 10:18-0500\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es\n"
+
+#: data/com.github.padjis.gcron.desktop.in:3
+#: data/com.github.padjis.gcron.appdata.xml.in:7
+msgid "Gcron"
+msgstr "Gcron"
+
+#: data/com.github.padjis.gcron.desktop.in:6
+msgid "com.github.padjis.gcron"
+msgstr "com.github.padjis.gcron"
+
+#: data/com.github.padjis.gcron.appdata.xml.in:8
+msgid "Display, understand and edit your cron configuration"
+msgstr "Vea, entienda y edite su configuración de cron"
+
+#: data/com.github.padjis.gcron.appdata.xml.in:10
+msgid ""
+"If you are tired to open your terminal in order to edit your cron jobs, or "
+"even better are interested in figuring out what does one of your current "
+"cron job do"
+msgstr ""
+"Si se ha cansado de tener que abrir el terminal para editar sus tareas de "
+"cron, o bien si le interesa averiguar lo que hace una de estas tareas"
+
+#: data/com.github.padjis.gcron.appdata.xml.in:12
+msgid ""
+"Gcron is the solution for you, it is an easy to use graphic interface that "
+"edit the cron configuration of the current user as well as explains its "
+"content"
+msgstr ""
+"Gcron es la solución. Es una interfaz fácil de utilizar que le permite "
+"editar la configuración de cron del usuario actual y le explica su contenido"
+
+#: data/com.github.padjis.gcron.appdata.xml.in:18
+msgid "App redesign"
+msgstr "Rediseño de la aplicación"
+
+#: data/com.github.padjis.gcron.appdata.xml.in:25
+msgid "Icon redesign"
+msgstr "Rediseño del icono"
+
+#: data/com.github.padjis.gcron.appdata.xml.in:32
+msgid "Delete button red"
+msgstr "Botón Eliminar en rojo"
+
+#: data/com.github.padjis.gcron.appdata.xml.in:33
+msgid "Bold logs error messages"
+msgstr "Mensajes de error en los registros en negrita"
+
+#: data/com.github.padjis.gcron.appdata.xml.in:40
+msgid "Added log area to display messages"
+msgstr "Se añadió un apartado de registros para mostrar mensajes"
+
+#: data/com.github.padjis.gcron.appdata.xml.in:41
+msgid "Cron jobs can be added"
+msgstr "Pueden añadirse tareas de cron"
+
+#: data/com.github.padjis.gcron.appdata.xml.in:42
+msgid "Cron jobs can be removed"
+msgstr "Pueden eliminarse tareas de cron"
+
+#: data/com.github.padjis.gcron.appdata.xml.in:43
+msgid "Cron jobs can be explained"
+msgstr "Pueden explicarse tareas de cron"
+
+#: data/com.github.padjis.gcron.appdata.xml.in:44
+msgid "The application is initialized from the cron setup"
+msgstr "La aplicación se inicializa a partir de la configuración de cron"
+
+#: data/com.github.padjis.gcron.appdata.xml.in:45
+msgid "The application can be reinitialized from the cron setup"
+msgstr ""
+"La aplicación puede reinicializarse a partir de la configuración de cron"
+
+#: data/com.github.padjis.gcron.appdata.xml.in:52
+msgid "Initial release"
+msgstr "Publicación inicial"
+
+#: data/com.github.padjis.gcron.appdata.xml.in:89
+msgid "padjis"
+msgstr "padjis"
